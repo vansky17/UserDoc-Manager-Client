@@ -1,21 +1,23 @@
 
 .NavCircleButton {
   background-color: #cacaca;
-  border-radius: 30px;
-  border: 0;
+  border-radius: 1px;
+  margin-bottom:0.2em;
+ /*  border-top: 1px solid black;
+  border-bottom: 1px solid black; */
   color: black;
   display: block;
-  font-size: 12px;
+  font-size: 0.7em;
   font-weight: bold;
   height: 60px;
-  padding: 8px;
+  /* padding: 8px; */
   text-align: center;
   text-decoration: none;
-  width: 60px;
+
 }
 
 a.NavCircleButton {
-  padding: 16px 8px 8px;
+  /* padding: 16px 8px 8px; */
 }
 
 .NavCircleButton:hover {

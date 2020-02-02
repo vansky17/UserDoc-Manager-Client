@@ -1,6 +1,6 @@
 {
-  "short_name": "Noteful",
-  "name": "Noteful Client",
+  "short_name": "UserDoc Manager",
+  "name": "UserDoc Manager Client",
   "icons": [
     {
       "src": "favicon.ico",

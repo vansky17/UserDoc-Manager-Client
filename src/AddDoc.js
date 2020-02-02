@@ -1,26 +1,26 @@
 import React from 'react';
-import NotefulContext from './NotefulContext';
+import UserDocsContext from './UserDocsContext';
 import config from './config';
 import './NotefulForm/NotefulForm.css';
+/* This class is not working yet */
+export default class AddDoc extends React.Component {
+  state = {
+    title: "",
+    content: "",
+    productSelect: "",
+    productId: "",
+    formValid: false,
+    titleValid: false,
+    contentValid: false,
+    productSelectValid: false,
+    validationMessage: null
+  };
 
-export default class AddNote extends React.Component {
-    state = {
-        title: "",
-        content: "",
-        folderSelect: "",
-        folderId: "",
-        formValid: false,
-        titleValid: false,
-        contentValid: false,
-        folderSelectValid: false,
-        validationMessage: null
-    };
+  static contextType = UserDocsContext;
 
-    static contextType = NotefulContext;
-
-    goBack = () => {
-        this.props.history.goBack();
-    }
+  goBack = () => {
+    this.props.history.goBack();
+  }
 
     updateFormEntry(e) {       
         const name = e.target.name;
@@ -29,7 +29,7 @@ export default class AddNote extends React.Component {
         if (e.target.selectedOptions) {
             id = e.target.selectedOptions[0].id;
             this.setState({
-                'folderId': id 
+                'productId': id 
             })
         }
         this.setState({
@@ -52,7 +52,7 @@ export default class AddNote extends React.Component {
             }
         }
         
-        else if((name === 'folderSelect') && (value === 'Select')) {
+        else if((name === 'productSelect') && (value === 'Select')) {
             hasErrors = true
         }
         
@@ -66,8 +66,8 @@ export default class AddNote extends React.Component {
     }
 
     formValid() {
-        const { titleValid, contentValid, folderSelectValid } = this.state;
-        if (titleValid && contentValid && folderSelectValid === true){
+        const { titleValid, contentValid, productSelectValid } = this.state;
+        if (titleValid && contentValid && productSelectValid === true){
             this.setState({
                 formValid: true,
                 validationMessage: null
@@ -81,12 +81,12 @@ export default class AddNote extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const { title, content, folderId } = this.state;
-        const note = {
-            name: title,
+        const { title, content, productId } = this.state;
+        const doc = {
+            /* name: title,
             content: content,
-            folderid: folderId,
-            modified: new Date()
+            productid: productId,
+            modified: new Date() */
         }
 
         this.setState({error: null})
@@ -94,7 +94,7 @@ export default class AddNote extends React.Component {
         
         fetch(`${config.API_ENDPOINT}/notes`, {
             method: 'POST',
-            body: JSON.stringify(note),
+            body: JSON.stringify(doc),
             headers: {
                 'content-type': 'application/json'
             }
@@ -110,7 +110,7 @@ export default class AddNote extends React.Component {
         })
         .then(data => {
             this.goBack()
-            this.context.addNote(data)
+            this.context.addDoc(data)
         })
         .catch(err => {
             this.setState({ err })
@@ -119,22 +119,22 @@ export default class AddNote extends React.Component {
 
     
     render() {
-        const folders = this.context.folders;
-        const options = folders.map((folder) => {
+        const products = this.context.products;
+        const options = products.map((product) => {
             return(
             <option 
-                key ={folder.id} 
-                id={folder.id}>
-            {folder.name}
+                key ={product.id} 
+                id={product.id}>
+            {product.name}
             </option>
             )
         })
         
         return (
-            <form 
+            {/* <form 
                 className="Noteful-form"
                 onSubmit={e => this.handleSubmit(e)}>
-                <h2 className="title">Add Note</h2>
+                <h2 className="title">Add Product</h2>
                 <div className="form-group">
                   <label htmlFor="title">Title</label>
                   <input 
@@ -144,11 +144,11 @@ export default class AddNote extends React.Component {
                     id="title" 
                     aria-label="Title"
                     aria-required="true"
-                    placeholder="Note Title"
+                    placeholder="Title"
                     onChange={e => this.updateFormEntry(e)}/>
                 </div>
                 <div className="form-group">
-                   <label htmlFor="content">Note:</label>
+                   <label htmlFor="content">Document:</label>
                    <textarea 
                         className="field"
                         name="content" 
@@ -186,7 +186,7 @@ export default class AddNote extends React.Component {
                      Save
                  </button>
                 </div>
-            </form> 
+            </form>  */}
         )
     }
 }

@@ -1,96 +1,123 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
-import NotefulContext from "../NotefulContext";
-import NoteListNav from "../NoteListNav/NoteListNav";
-import NotePageNav from "../NotePageNav/NotePageNav";
-import NoteListMain from "../NoteListMain/NoteListMain";
-import NotePageMain from "../NotePageMain/NotePageMain";
+import { Route, Link, Switch} from "react-router-dom";
+import { withRouter } from "react-router";
+import UserDocsContext from "../UserDocsContext";
 import UploadFile from "../UploadFile";
-import ErrorBoundary from "../ErrorHandlers/ErrorBoundary";
+import AddProductGroup from "../AddProductGroup";
+import Sidebar from "../Sidebar/Sidebar"
+import Header from '../Header/Header'
+import ProductGroup from '../ProductGroup/ProductGroup'
 import "./App.css";
+import Config from '../config'
+const API = Config.API_ENDPOINT;
 
-
+const getDocsForProduct = (docs=[], productid) => { 
+  if (!productid) {
+    throw new Error("Invalid product ID!")
+  } else {
+    return docs.filter(doc => doc.productid === productid)
+  }
+}
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: [],
-      folders: [],
+      products: [],
       files:[],
       errorBoundaryKey: 0
     };
   }
+   getDocsForProduct = (docs=[], productid) => { 
+    if (!productid) {
+      throw new Error("Invalid product ID!")
+    } else {
+      return docs.filter(doc => doc.productid === productid)
+    }
+  }
 
-  handleBackButton = () => {
-    this.setState(
-      prevState => ({
-        errorBoundaryKey: prevState.errorBoundaryKey + 1
-      }),
-      console.clear()
-    );
+  handleAddProduct = (product, docs) => {
+    product.docs = getDocsForProduct(docs, product.id)
+    this.setState({
+      products: [...this.state.products, product]
+    });
   };
-
+/*   handleAddDoc = doc => {
+    this.setState({
+      docs: [...this.state.docs, doc]
+    });
+  }; */
   handleUploadFile = file => {
     this.setState({
       files: [...this.state.files, file]
     });
   };
 
-
-
-  renderNavRoutes() {
-    return (
-      <>
-        {["/", "/folder/:folderId"].map(path => (
-          <Route exact key={path} path={path} component={NoteListNav} />
-        ))}
-        <Route path="/upload-file" component={NotePageNav} />
-      </>
-    );
+  componentDidMount() {
+    Promise.all([fetch(`${API}/docs`), fetch(`${API}/products`)])
+      .then(([docsRes, productsRes]) => {
+        if (!docsRes.ok) return docsRes.json().then(e => Promise.reject(e));
+        if (!productsRes.ok)
+          return productsRes.json().then(e => Promise.reject(e));
+        return Promise.all([docsRes.json(), productsRes.json()]);
+      })
+      .then(([docs, products]) => {
+        products.map(product => {
+          return this.handleAddProduct(product, docs);
+        });
+        /* docs.map(doc => {
+          return this.handleAddDoc(doc);
+        }); */
+      })
+      .catch(error => {
+        console.error( error );
+      });
   }
-
-  renderMainRoutes() {
-    return (
-      <>
-        {["/", "/folder/:folderId"].map(path => (
-          <Route exact key={path} path={path} component={NoteListMain} />
-        ))}
-        <ErrorBoundary key={this.state.errorBoundaryKey}>
-          <Route path="/note/:noteId" component={NotePageMain} />
-        </ErrorBoundary>
-        <Route path="/upload-file" component={UploadFile} />
-      </>
-    );
-  }
-
+  
   render() {
     const contextValue = {
-      notes: this.state.notes,
-      folders: this.state.folders,
+      docs: this.state.docs,
+      products: this.state.products,
+      files: this.state.files,
       toggle: this.state.toggle,
       toggleErrors: this.handleErrorToggle,
-      addNote: this.handleAddNote,
+      addDoc: this.handleAddNote,
       uploadFile: this.handleUploadFile,
-      addFolder: this.handleAddFolder,
-      deleteNote: this.handleDeleteNote,
-      deleteFolder: this.handleDeleteFolder,
+      addProduct: this.handleAddProduct,
+      /* deleteNote: this.handleDeleteNote, */
+      deleteProduct: this.handleDeleteFolder,
       back: this.handleBackButton
     };
-
+    console.log( this.state.products)
     return (
-      <NotefulContext.Provider value={contextValue}>
+      <UserDocsContext.Provider value={contextValue}>
         <div className="App">
-          <nav className="App__nav">{this.renderNavRoutes()}</nav>
-          <header className="App__header">
-            <h1>
-            </h1>
-          </header>
-          <main className="App__main">{this.renderMainRoutes()}</main>
+          <Sidebar></Sidebar> 
+          <Route path='/main'> 
+            <main role="main">
+            <Header></Header>
+            {/* <ProductGroup></ProductGroup>
+            <ProductGroup></ProductGroup>
+            <ProductGroup></ProductGroup> */}
+            {this.state.products.map(product =>
+            <ProductGroup
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              docs={product.docs}
+            >    
+            </ProductGroup>
+          )}
+            <Switch>
+              <Route path="/upload-file" exact component={UploadFile} />
+              <Route path="/add-product" exact component={AddProductGroup} />
+            </Switch>
+            </main>
+          </Route>
         </div>
-      </NotefulContext.Provider>
+      </UserDocsContext.Provider>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

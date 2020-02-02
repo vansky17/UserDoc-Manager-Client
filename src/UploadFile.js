@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import UserDocsContext from './UserDocsContext';
 /* import {Progress} from 'reactstrap'; */
 /* import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; */
+import './Upload.css'
 class UploadFile extends Component {
 
   constructor(props){
@@ -14,7 +16,7 @@ class UploadFile extends Component {
       errorMessage : ""
     }
   }
-
+  static contextType = UserDocsContext;
   handleChange = (ev) => {
     this.setState({success: false, url : ""});
 
@@ -58,6 +60,7 @@ class UploadFile extends Component {
 
 
   render() {
+    const { history } = this.props;
     const SuccessMessage = () => (
       <div style={{padding:50}}>
         <h3 style={{color: 'green'}}>SUCCESSFUL UPLOAD</h3>
@@ -74,15 +77,75 @@ class UploadFile extends Component {
       </div>
     )
     return (
-      <div className="App">
-        <center>
-          <h1>UPLOAD A FILE</h1>
+      <div className="upload">
+        <a href="javascript:void(0)" className="close" onClick={() => {
+          history.push("/"); 
+          }}>
+        </a>
+        <header>
+          <h3>Upload Document</h3>
+        </header>
+        <form className='upload-form'>
+        <div>
+            <label htmlFor="doc-name">Document name</label>
+            <input placeholder='Document Name' type="text" name='doc-name' id='doc-name' />
+          </div>
+          <div>
+            <label htmlFor="part-number">Part number</label>
+            <input type="text" name='part-number' id='part-number' placeholder='Enter part number' />
+          </div>
+          <div>
+            <label htmlFor="version">Version</label>
+            <input type="number" name='version' id='version' />
+          </div>
+          <div>
+            <label htmlFor="format">Format</label>
+            <select name='format' id='format' placeholder='pdf'>
+              <option>pdf</option>
+              <option>docx</option>
+              <option>xsl</option>
+              <option>ppt</option>
+              <option>html</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="release-date">Release date</label>
+            <input type="text" name='release-date' id='release-date' placeholder="YYYY-MM-DD"/>
+          </div>
+          <div>
+            <label htmlFor="description">Description</label>
+            <textarea type="textfield" name='description' id='description'></textarea>
+          </div>
+          <div>
+            <label htmlFor="author">Author</label>
+            <input type="text" name='author' id='author' />
+          </div>
+          <div>
+            <label htmlFor="pg">Assign to product group</label>
+            <select name='pg' id='pg'>
+              <option>Product 1</option>
+              <option>Product 2</option>
+              <option>Product 3</option>
+            </select>
+          </div>
+        </form>
+        
+        <h3>UPLOAD FILE</h3>
           {this.state.success ? <SuccessMessage/> : null}
           {this.state.error ? <ErrorMessage/> : null}
           <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file"/>
           <br/>
           <button onClick={this.handleUpload}>UPLOAD</button>
-        </center>
+        <div className="buttons">
+              <button 
+                type="button" 
+                className="button"
+                onClick={() => {
+                  history.push("/"); 
+                  }}>
+                    Cancel
+              </button>
+            </div> 
       </div>
     );
   }

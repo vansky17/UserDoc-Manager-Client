@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "alias": "Noteful-vansky17",
-  "name": "Noteful",
+  "alias": "UserDoc-vansky17",
+  "name": "UserDoc",
   "routes": [
       {
         "src": "^/static/(.*)",
