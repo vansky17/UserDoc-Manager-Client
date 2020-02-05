@@ -1,13 +1,14 @@
 import React from 'react'
-import './App.css'
+import './Header.css'
 
 class Header extends React.Component {
   render () {
     return (
       <>
       <header id="home" role="banner">
-        <h1 className="slideDown">Hero</h1>
-        <h3 className="slideDown">Describes basic functionality of the app</h3>
+        <h1 className="slideDown">UserDocs Manager</h1>
+				<h3 >Overview Of Technical Documents</h3>
+        <h4 >Your Department</h4>
       </header>
     </>
     )

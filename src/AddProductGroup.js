@@ -126,8 +126,8 @@ export default class AddProductGroup extends React.Component {
                     onChange={e => this.updateFormEntry(e)}/>
                 </div> </form>
                 */
-          <div className="upload">
-            <a className="close" onClick={() => {
+          <div className="upload" id="add-pg">
+            <a href="/#" className="close" onClick={() => {
               history.push("/"); 
               }}>
             </a>

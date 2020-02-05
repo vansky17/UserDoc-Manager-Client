@@ -9,7 +9,7 @@
   margin-right: -50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  background-color: rgba(64,64,64,0.95);
+  background-color: rgba(64,64,64,.97);
 }
 .upload header{
   margin-top:2em;
@@ -18,7 +18,6 @@
 .product-group-form {
   margin-bottom: 1em;
 }
-
 
 .close {
   position: absolute;
@@ -60,4 +59,13 @@
   padding: 8px;
   text-align: center;
   text-decoration: none;
+}
+
+@media screen and (max-width:670px){
+  .close {
+    top: 3em;
+  }
+  .upload {
+    font-size: .9em;
+  }
 }

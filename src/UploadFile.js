@@ -77,8 +77,8 @@ class UploadFile extends Component {
       </div>
     )
     return (
-      <div className="upload">
-        <a href="javascript:void(0)" className="close" onClick={() => {
+      <div className="upload" id="add-doc">
+        <a href="/#" className="close" onClick={() => {
           history.push("/"); 
           }}>
         </a>

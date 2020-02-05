@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Link, Switch} from "react-router-dom";
+import { Route} from "react-router-dom";
 import { withRouter } from "react-router";
 import UserDocsContext from "../UserDocsContext";
 import UploadFile from "../UploadFile";
@@ -8,8 +8,8 @@ import Sidebar from "../Sidebar/Sidebar"
 import Header from '../Header/Header'
 import ProductGroup from '../ProductGroup/ProductGroup'
 import "./App.css";
-import Config from '../config'
-const API = Config.API_ENDPOINT;
+/* import Config from '../config' */
+/* const API = Config.API_ENDPOINT; */
 
 const getDocsForProduct = (docs=[], productid) => { 
   if (!productid) {
@@ -52,8 +52,8 @@ class App extends React.Component {
       files: [...this.state.files, file]
     });
   };
-
-  componentDidMount() {
+ // Dynamic version:
+ /*  componentDidMount() {
     Promise.all([fetch(`${API}/docs`), fetch(`${API}/products`)])
       .then(([docsRes, productsRes]) => {
         if (!docsRes.ok) return docsRes.json().then(e => Promise.reject(e));
@@ -64,16 +64,16 @@ class App extends React.Component {
       .then(([docs, products]) => {
         products.map(product => {
           return this.handleAddProduct(product, docs);
-        });
+        }); */
         /* docs.map(doc => {
           return this.handleAddDoc(doc);
         }); */
-      })
+    /*   })
       .catch(error => {
         console.error( error );
       });
   }
-  
+   */
   render() {
     const contextValue = {
       docs: this.state.docs,
@@ -84,7 +84,6 @@ class App extends React.Component {
       addDoc: this.handleAddNote,
       uploadFile: this.handleUploadFile,
       addProduct: this.handleAddProduct,
-      /* deleteNote: this.handleDeleteNote, */
       deleteProduct: this.handleDeleteFolder,
       back: this.handleBackButton
     };
@@ -96,10 +95,11 @@ class App extends React.Component {
           <Route path='/main'> 
             <main role="main">
             <Header></Header>
-            {/* <ProductGroup></ProductGroup>
-            <ProductGroup></ProductGroup>
-            <ProductGroup></ProductGroup> */}
-            {this.state.products.map(product =>
+            <ProductGroup key={1}></ProductGroup>
+            <ProductGroup key={2}></ProductGroup>
+            <ProductGroup key={3}></ProductGroup> 
+            { // Dynamic version:
+              /* this.state.products.map(product =>
             <ProductGroup
               key={product.id}
               id={product.id}
@@ -107,11 +107,11 @@ class App extends React.Component {
               docs={product.docs}
             >    
             </ProductGroup>
-          )}
-            <Switch>
+          ) */}
+            {/* <Switch> */}
               <Route path="/upload-file" exact component={UploadFile} />
               <Route path="/add-product" exact component={AddProductGroup} />
-            </Switch>
+            {/* </Switch> */}
             </main>
           </Route>
         </div>

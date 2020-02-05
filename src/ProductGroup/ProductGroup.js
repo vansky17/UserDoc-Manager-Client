@@ -1,9 +1,9 @@
 import React from 'react'
-import './App.css'
+import '../App/App.css'
 import Doc from '../Doc/Doc'
 import UserDocsContext from "../UserDocsContext";
 import PropTypes from 'prop-types';
-
+import uuid from "uuid"; 
 class ProductGroup extends React.Component {
 
   static defaultProps = {
@@ -16,24 +16,22 @@ class ProductGroup extends React.Component {
   render () {
 
     const { name, id, docs } = this.props
-
     console.log(name, id, docs);
     return (
       <>
-        <section id={id}>
-        <header>
-          <h3>{name}</h3>
-        </header>
+        <section id="2">
+        {/* <header> */}
+        <h3>Product Line{}</h3>
+        {/* </header> */}
         <table>
           <tbody>
           <tr>
             <th>Document</th><th>Part Number</th><th>Doc Version</th><th>Format</th><th>Release Date</th>
           </tr> 
-          {/*  For the static version:
-          <Doc></Doc>
-          <Doc></Doc>
-          <Doc></Doc> */}
-          {docs.map(doc =>
+          <Doc key={uuid.v4()}/>
+          <Doc key={uuid.v4()}/>
+          <Doc key={uuid.v4()}/>
+          {/* docs.map(doc =>
             <Doc
               key={doc.id}
               id={doc.id}
@@ -48,7 +46,7 @@ class ProductGroup extends React.Component {
               path={doc.path}
             >    
             </Doc>
-          )}
+          ) */}
       </tbody>
         </table>
       </section>
