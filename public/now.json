@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "alias": "UserDoc-vansky17",
-  "name": "UserDoc",
+  "alias": "user-docs-vansky17",
+  "name": "user-docs-manager",
   "routes": [
       {
         "src": "^/static/(.*)",

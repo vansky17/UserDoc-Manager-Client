@@ -9,7 +9,7 @@
   margin-right: -50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  background-color: rgba(64,64,64,.97);
+  background-color: rgba(64,64,64);
 }
 .upload header{
   margin-top:2em;
@@ -60,7 +60,9 @@
   text-align: center;
   text-decoration: none;
 }
-
+.textfield-description {
+  max-width: 80%;
+}
 @media screen and (max-width:670px){
   .close {
     top: 3em;

@@ -23,19 +23,19 @@ class Doc extends React.Component {
       });
     }
   }
-   /* formatDate = (str) => {
+   formatDate = (str) => {
     return str.substr(0, 10);
-  } */
+  }
  render () {
-  /* const { name, partnum,vernum, formattype, reldate, author, descr, path} = this.props */
+  const { name, partnum,vernum, formattype, reldate, author, descr, path} = this.props 
 
   return [
     <tr onClick={this.toggleExpander} className="tr-toggable">
-      <td><input style={{display: "none"}} type="checkbox" />Name of document</td>
-      <td >1234.5678.01</td>
-      <td>1</td>
-      <td>PDF</td>
-      <td>17-04-01</td>
+ <td><input style={{display: "none"}} type="checkbox" />{name}</td>
+  <td >{partnum}</td>
+  <td>{vernum}</td>
+  <td>{formattype}</td>
+  <td>{this.formatDate(reldate)}</td>
     </tr>,
     this.state.expanded && (
       <tr className="expandable" key="tr-expander">
@@ -44,9 +44,9 @@ class Doc extends React.Component {
             <div >
               <h4>Description</h4>
               <ul> 
-                <li>This is a document description</li>
-                <li>Author: Some Author </li>
-                <li><button>OPEN</button></li>
+                <li>{descr}</li>
+                <li>Author: {author} </li>
+                <li><button href={path}>OPEN</button></li>
               </ul>
             </div>
           </div>
@@ -54,7 +54,6 @@ class Doc extends React.Component {
       </tr>
       )
     ];
-   
   }
 }
 

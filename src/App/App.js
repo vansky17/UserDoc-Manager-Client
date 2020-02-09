@@ -8,8 +8,8 @@ import Sidebar from "../Sidebar/Sidebar"
 import Header from '../Header/Header'
 import ProductGroup from '../ProductGroup/ProductGroup'
 import "./App.css";
-/* import Config from '../config' */
-/* const API = Config.API_ENDPOINT; */
+import Config from '../config'
+const API = Config.API_ENDPOINT;
 
 const getDocsForProduct = (docs=[], productid) => { 
   if (!productid) {
@@ -24,17 +24,18 @@ class App extends React.Component {
     super(props);
     this.state = {
       products: [],
+      docs: [],
       files:[],
       errorBoundaryKey: 0
     };
   }
-   getDocsForProduct = (docs=[], productid) => { 
+  /*  getDocsForProduct = (docs=[], productid) => { 
     if (!productid) {
       throw new Error("Invalid product ID!")
     } else {
       return docs.filter(doc => doc.productid === productid)
     }
-  }
+  } */
 
   handleAddProduct = (product, docs) => {
     product.docs = getDocsForProduct(docs, product.id)
@@ -42,18 +43,23 @@ class App extends React.Component {
       products: [...this.state.products, product]
     });
   };
-/*   handleAddDoc = doc => {
+  handleAddDoc = doc => {
     this.setState({
       docs: [...this.state.docs, doc]
     });
-  }; */
+  };
   handleUploadFile = file => {
     this.setState({
       files: [...this.state.files, file]
     });
   };
- // Dynamic version:
- /*  componentDidMount() {
+  handleDeleteProduct = productId => {
+    this.setState({
+      products: this.state.products.filter(product => product.id !== productId)
+    });
+  };
+ 
+   componentDidMount() {
     Promise.all([fetch(`${API}/docs`), fetch(`${API}/products`)])
       .then(([docsRes, productsRes]) => {
         if (!docsRes.ok) return docsRes.json().then(e => Promise.reject(e));
@@ -64,16 +70,16 @@ class App extends React.Component {
       .then(([docs, products]) => {
         products.map(product => {
           return this.handleAddProduct(product, docs);
-        }); */
-        /* docs.map(doc => {
+        }); 
+        docs.map(doc => {
           return this.handleAddDoc(doc);
-        }); */
-    /*   })
+        });
+        })
       .catch(error => {
         console.error( error );
       });
   }
-   */
+   
   render() {
     const contextValue = {
       docs: this.state.docs,
@@ -84,22 +90,19 @@ class App extends React.Component {
       addDoc: this.handleAddNote,
       uploadFile: this.handleUploadFile,
       addProduct: this.handleAddProduct,
-      deleteProduct: this.handleDeleteFolder,
+      deleteProduct: this.handleDeleteProduct,
       back: this.handleBackButton
     };
     console.log( this.state.products)
     return (
       <UserDocsContext.Provider value={contextValue}>
         <div className="App">
-          <Sidebar></Sidebar> 
+          <Sidebar />
           <Route path='/main'> 
             <main role="main">
-            <Header></Header>
-            <ProductGroup key={1}></ProductGroup>
-            <ProductGroup key={2}></ProductGroup>
-            <ProductGroup key={3}></ProductGroup> 
-            { // Dynamic version:
-              /* this.state.products.map(product =>
+            <Header/>
+ 
+            { this.state.products.map(product =>
             <ProductGroup
               key={product.id}
               id={product.id}
@@ -107,7 +110,7 @@ class App extends React.Component {
               docs={product.docs}
             >    
             </ProductGroup>
-          ) */}
+            )}
             {/* <Switch> */}
               <Route path="/upload-file" exact component={UploadFile} />
               <Route path="/add-product" exact component={AddProductGroup} />

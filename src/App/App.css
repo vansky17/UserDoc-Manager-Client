@@ -124,11 +124,6 @@ padding: 0.5em 1.5em 0.5em 1.5em;
 color: black;
 text-decoration: none;
 }
-.divider-menu{
-height:100%;
-background:#aaa;
-z-index:2;
-}
 /* Table */
 table {
   margin: 0 auto;
@@ -195,9 +190,6 @@ th {
 @media screen and (min-width:1058px){
   body{
     font-size: 22px;
-  }
-  div.mobile-menu {
-  display:none;
   }
   .work-container {
     display: flex;

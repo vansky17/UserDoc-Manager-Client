@@ -1,6 +1,6 @@
 {
-  "short_name": "UserDoc Manager",
-  "name": "UserDoc Manager Client",
+  "short_name": "userdoc-manager",
+  "name": "userdoc-manager-client",
   "icons": [
     {
       "src": "favicon.ico",

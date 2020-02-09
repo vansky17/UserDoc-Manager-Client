@@ -11,6 +11,8 @@ export default class AddProductGroup extends React.Component {
       this.state = {
         hasErrors: false,
         title: "",
+        changedTitle: "",
+        productid: "",
         formValid: false,
         titleValid: false,
         validationMessage: "",
@@ -68,9 +70,7 @@ export default class AddProductGroup extends React.Component {
 
     handleSubmit(e) {
       e.preventDefault();
-      const {
-        title
-      } = this.state;
+      const {title} = this.state;
       const product = {
         name: title
       }
@@ -96,7 +96,7 @@ export default class AddProductGroup extends React.Component {
         })
         .then(data => {
           this.goBack()
-          this.context.addFolder(data)
+          this.context.addProduct(data)
         })
         .catch(error => {
           this.setState({
@@ -104,28 +104,39 @@ export default class AddProductGroup extends React.Component {
           })
         })
     }
-
+    handleClickDelete = (e) => {
+      e.preventDefault()
+      const {productId} = this.state.productid
+      console.log(this.state.productid)
+      fetch(`${config.API_ENDPOINT}/products/${this.state.productid}`, {
+        method: 'DELETE',
+        headers: {
+          'content-Type': 'application/json'
+        },
+      })
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(e => Promise.reject(e))
+        }
+      })
+      .then(() => {
+        
+        this.context.deleteProduct(this.state.productid)
+        /* this.props.history.push("/") */
+        this.props.history.goBack()
+        window.location.reload()      
+      })
+      .catch(err => {
+        console.log({ err })
+      })
+    }
+    handleChangeSelect = (event) =>{
+      this.setState({ productid: event.target.value })
+    }
     render() {
       const { history } = this.props;
+      const { products=[] } = this.context
       return (
-           /*  <form 
-                className=""
-                onSubmit={e => this.handleSubmit(e)}>
-                <h2 className="title">Add Folder</h2>
-                <div className="form-group">
-                  <label htmlFor="title">Title</label>
-                  <input 
-                    type="text" 
-                    className="field"
-                    name="title" 
-                    id="title" 
-                    aria-label="Title"
-                    aria-required="true"
-                    placeholder="Folder Title"
-                    aria-placeholder="Folder Title"
-                    onChange={e => this.updateFormEntry(e)}/>
-                </div> </form>
-                */
           <div className="upload" id="add-pg">
             <a href="/#" className="close" onClick={() => {
               history.push("/"); 
@@ -134,23 +145,54 @@ export default class AddProductGroup extends React.Component {
             <header>
               <h3>Manage product groups</h3>
             </header>
-            <form className='product-group-form'>
-          <div>
-            <label htmlFor="pg-name">Create new product group</label>
-            <input placeholder='New Product Name' type="text" name='pg-name' id='pg-name' />
-          </div>
-          <button type='submit'>Create</button>
-          <div>
-            <label htmlFor="rename">Rename product group</label>
-            <select name='rename' id='rename' >
-              <option>Product 1</option>
-              <option>Product 2</option>
-              <option>Product 3</option>
-            </select>
-            <input type="text" name='new-name' id='new-name' placeholder='Enter new name' />
-          </div>
-          <button type='submit'>Rename</button>
-          <div>
+            <form 
+                className=""
+                onSubmit={e => this.handleSubmit(e)}>
+                <div className="form-group">
+                  <label htmlFor="title">Create new product group</label>
+                  <input 
+                    type="text" 
+                    className="field"
+                    name="title" 
+                    id="title" 
+                    aria-label="Title"
+                    aria-required="true"
+                    placeholder="Product name"
+                    aria-placeholder="Product name"
+                    onChange={e => this.updateFormEntry(e)}/>
+                </div>
+                <div className="buttons">
+                 <button 
+                    type="submit" 
+                    className="button"
+                    disabled={this.state.formValid === false}>
+                     Create
+                 </button>
+                 {}
+                </div>
+              </form>  
+              <form className="">
+                <div className="form-group">
+                <label htmlFor="delete">Delete product group</label>
+                <select onChange={this.handleChangeSelect} name='delete' id='delete' >
+                  <option>Select one</option>
+                  {products.map(product => 
+                    <option value={product.id} key={product.id}>{product.name}</option>
+                  )}
+                </select>
+              <div className="buttons">
+                  <button 
+                    onClick={this.handleClickDelete}
+                    type="" 
+                    className="button"
+                      /* disabled={} */>
+                    Delete
+                  </button>
+                  {}
+                  </div>
+              </div>
+              </form>
+          {/*
             <label htmlFor="delete">Delete product group</label>
             <select name='delete' id='delete' >
               <option>Product 1</option>
@@ -159,7 +201,7 @@ export default class AddProductGroup extends React.Component {
             </select>
           </div>
           <button type='submit'>Delete</button>
-          </form>
+          </form> */}
             <div className="buttons">
               <button 
                 type="button" 
@@ -168,12 +210,6 @@ export default class AddProductGroup extends React.Component {
                   history.push("/"); 
                   }}>
                     Cancel
-              </button>
-              <button 
-                type="submit" 
-                className="button"
-                disabled={this.state.formValid === false}>
-                  Save
               </button>
                 {}
             </div> 

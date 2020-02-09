@@ -23,3 +23,11 @@ a.NavCircleButton {
 .NavCircleButton:hover {
   cursor: pointer;
 }
+@media screen and (max-width:670px){
+  
+  .NavCircleButton{
+    height: 45px;
+    overflow: hidden;
+  }
+  
+}

@@ -6,24 +6,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faFileUpload, faProjectDiagram } from "@fortawesome/free-solid-svg-icons";
 import { HashLink as Link  } from 'react-router-hash-link';
 import "../App/App.css";
-/* import Config from '../config' */
-/* const API = Config.API_ENDPOINT; */
+import "./Sidebar.css";
+import Config from '../config'
+const API = Config.API_ENDPOINT;
 
 class Sidebar extends React.Component {
 
   static contextType = UserDocsContext;
 
   state = {
-     visible: false
+     visible: false,
+     productId: "",
   }
-  toggleMobileMenu = () => {
-    
+  toggleMobileMenu = () => {  
     this.setState({ visible: ! this.state.visible });
     console.log(this.state.visible);
   }
-  
+
   render () {
-    /* const { products=[] } = this.context */
+    const { products=[] } = this.context
     const mobileStyle = this.state.visible? "block" : "none"
  
     return(
@@ -51,7 +52,7 @@ class Sidebar extends React.Component {
                     HOME
                 </CircleButton>
                 </li>
-                {/* products.map(product =>
+                {products.map(product =>
                 <li key={product.id}>
                 <CircleButton
                   tag={Link}
@@ -62,37 +63,7 @@ class Sidebar extends React.Component {
                   {product.name}
                 </CircleButton>
                 </li>
-              )*/}
-                <li>
-                  <CircleButton
-                    tag={Link}
-                    className=''
-                  to={'/#1'}
-                  type='button'
-                >
-                  Product 1
-                </CircleButton>
-                </li>
-              <li>
-                <CircleButton
-                  tag={Link}
-                  className=''
-                  to={'/#2'}
-                  type='button'
-                >
-                  Product 2
-                </CircleButton>
-                </li>
-              <li>
-                <CircleButton
-                  tag={Link}
-                  className=''
-                  to={'/#3'}
-                  type='button'
-                >
-                  Product 3
-                </CircleButton>
-                </li>
+              )}
               <hr></hr>
               <li>
             <CircleButton   
@@ -119,9 +90,7 @@ class Sidebar extends React.Component {
             </ul>
           </div>
         </div>
-
-        <div className="divider-menu"></div>
-        
+        <div className="divider-menu">     
           <div className="mobile-menu slideDown" style={{display: `${mobileStyle}`}} >        
           <ul> 
             <li>
@@ -137,39 +106,26 @@ class Sidebar extends React.Component {
                     HOME
                </CircleButton>
             </li>
-            <li>
-                  <CircleButton
-                    tag={Link}
-                    className=''
-                  to={'/#1'}
-                  type='button'
-                  onClick={this.toggleMobileMenu}
-                >
-                  Product 1
-                </CircleButton>
-                </li>
-              <li>
+            <li style={{display: 'flex',
+                         flexDirection: "row",
+                         justifyContent: 'space-between',
+                         alignContent: 'center ',
+                         flexWrap: 'wrap'
+                }}>
+            { products.map(product =>
+                <li style={{width: '33%',display:'inline'}}    
+                key={product.id}> 
                 <CircleButton
                   tag={Link}
                   className=''
-                  to={'/#2'}
+                  to={`/#${product.id}`}
                   type='button'
                   onClick={this.toggleMobileMenu}
                 >
-                  Product 2
+                  {product.name}
                 </CircleButton>
                 </li>
-              <li>
-                <CircleButton
-                  tag={Link}
-                  className=''
-                  to={'/#3'}
-                  type='button'
-                  onClick={this.toggleMobileMenu}
-                >
-                  Product 3
-                </CircleButton>
-                </li>
+              )} </li>
             <hr></hr>
             <li>
             <CircleButton   
@@ -197,6 +153,7 @@ class Sidebar extends React.Component {
             </li>
           </ul> 
         </div> 
+      </div>  
         
         
       </nav>
