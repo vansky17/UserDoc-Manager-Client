@@ -46,7 +46,9 @@
 .close:after {
   transform: rotate(-45deg);
 }
-
+.doc-form {
+  background-color: rgb(64,64,64);
+}
 .upload .buttons {
   /* width: 45%; */
   background-color: black;

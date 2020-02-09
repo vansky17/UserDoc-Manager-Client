@@ -227,7 +227,7 @@ class UploadFile extends Component {
           <h3>Upload Document</h3>
         </header>
         <form 
-          className=""
+          className="doc-form"
           onSubmit={e => this.handleSubmit(e)}>
           <div className="form-group">
             <label htmlFor="doc-name">Document name</label>
@@ -326,7 +326,7 @@ class UploadFile extends Component {
             </button>
           </div>
         </form> 
-        
+      <div className="doc-form">  
         <h3>UPLOAD FILE</h3>
           {this.state.success ? <SuccessMessage/> : null}
           {this.state.error ? <ErrorMessage/> : null}
@@ -343,6 +343,7 @@ class UploadFile extends Component {
                     Cancel
               </button>
             </div> 
+            </div>
       </div>
     );
   }
