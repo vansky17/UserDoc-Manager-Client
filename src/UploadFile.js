@@ -88,7 +88,7 @@ class UploadFile extends Component {
   }
   formValid() {
     const { titleValid, productSelectValid, vernumValid, vernum, authorValid} = this.state;
-    if (titleValid && productSelectValid && vernumValid && (vernum != 0) && authorValid === true) {
+    if (titleValid && productSelectValid && vernumValid && (vernum !== 0) && authorValid === true) {
       this.setState({
         formValid: true,
         validationMessage: null
@@ -149,13 +149,14 @@ class UploadFile extends Component {
 
   }
   handleUpload = (ev) => {
+    ev.preventDefault();
     let file = this.uploadInput.files[0];
     // Split the filename to get the name and type
     let fileParts = this.uploadInput.files[0].name.split('.');
     let fileName = fileParts[0];
     let fileType = fileParts[1];
     console.log("Preparing the upload");
-    axios.post("http://localhost:8000/api/upload",{
+    axios.post(`${config.API_ENDPOINT}/upload`,{
       fileName : fileName,
       fileType : fileType
     })
@@ -163,7 +164,8 @@ class UploadFile extends Component {
       var returnData = response.data.data.returnData;
       var signedRequest = returnData.signedRequest;
       var url = returnData.url;
-      this.setState({url: url})
+      this.setState({url: url, path: url})
+      
       console.log("Recieved a signed request " + signedRequest);
 
       var options = {
@@ -204,7 +206,25 @@ class UploadFile extends Component {
     const SuccessMessage = () => (
       <div style={{padding:50}}>
         <h3 style={{color: 'green'}}>SUCCESSFUL UPLOAD</h3>
-        <a href={this.state.url}>Access the file here</a>
+        {/* <a href={this.state.url}>Access the file here</a> */}
+        <div className="buttons">
+            <button
+              type="submit"
+              className="button"
+              disabled={!this.state.formValid}>
+              CONFIRM? 
+            </button>
+            <div className="buttons">
+              <button 
+                type="button" 
+                className="button"
+                onClick={() => {
+                  history.push("/"); 
+                  }}>
+                    ABORT
+              </button>
+             </div> 
+          </div>
         <br/>
       </div>
     )
@@ -240,6 +260,13 @@ class UploadFile extends Component {
               aria-required="true"
               placeholder='Document Name'
               onChange={e => this.updateFormEntry(e)} />
+              <label htmlFor="part-number">Browse file</label>
+            <input 
+              name="select-file"
+              id="select-file"
+              onChange={this.handleChange}
+              ref={(ref) => { this.uploadInput = ref; }} 
+              type="file"/>
             <label htmlFor="part-number">Part number</label>
             <input
               type="text"
@@ -317,22 +344,25 @@ class UploadFile extends Component {
               {options}
             </select>
           </div>
-          <div className="buttons">
+          {/* <div className="buttons">
             <button
               type="submit"
               className="button"
               disabled={!this.state.formValid}>
               Submit Doc
             </button>
-          </div>
-        </form> 
-      <div className="doc-form">  
-        <h3>UPLOAD FILE</h3>
+          </div> */}
+       {/*  </form> 
+        <form className="doc-form"> */}
+        {/* <h3>UPLOAD FILE</h3> */}
           {this.state.success ? <SuccessMessage/> : null}
           {this.state.error ? <ErrorMessage/> : null}
-          <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file"/>
-          <br/>
-          <button onClick={this.handleUpload}>UPLOAD</button>
+          <button 
+          onClick={this.handleUpload}
+          className="button"
+          disabled={!this.state.formValid}>
+            UPLOAD DOC
+          </button>
         <div className="buttons">
               <button 
                 type="button" 
@@ -342,8 +372,8 @@ class UploadFile extends Component {
                   }}>
                     Cancel
               </button>
-            </div> 
-            </div>
+          </div> 
+        </form>
       </div>
     );
   }

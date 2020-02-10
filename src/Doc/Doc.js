@@ -46,7 +46,7 @@ class Doc extends React.Component {
               <ul> 
                 <li>{descr}</li>
                 <li>Author: {author} </li>
-                <li><button href={path}>OPEN</button></li>
+                <li><button ><a href={path} target="_blank">OPEN</a></button></li>
               </ul>
             </div>
           </div>
