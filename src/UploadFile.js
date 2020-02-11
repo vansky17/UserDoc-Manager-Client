@@ -161,16 +161,18 @@ class UploadFile extends Component {
       fileType : fileType
     })
     .then(response => {
-      var returnData = response.data.data.returnData;
-      var signedRequest = returnData.signedRequest;
-      var url = returnData.url;
+      console.log(response)
+      const returnData = response.data.data.returnData;
+      const signedRequest = returnData.signedRequest;
+      const url = returnData.url;
       this.setState({url: url, path: url})
+      
       
       console.log("Recieved a signed request " + signedRequest);
 
-      var options = {
+      const options = {
         headers: {
-          'Content-Type': fileType
+          'Content-Type': 'application/pdf'
         }
       };
       axios.put(signedRequest,file,options)
@@ -272,7 +274,7 @@ class UploadFile extends Component {
               type="text"
               className="field"
               name="partnum"
-              id="title"
+              id="part-number"
               aria-label="Part number"
               aria-required="false"
               placeholder='optional'
@@ -303,7 +305,7 @@ class UploadFile extends Component {
               type="date"
               className="field"
               name="reldate"
-              id="title"
+              id="reldate"
               aria-label="Release Date"
               aria-required="false"
               placeholder='today'
