@@ -2,6 +2,13 @@ nav{
   overflow-y: auto;  
   z-index: 2;
 }
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1.5px solid black;
+}
 @media screen and (max-width:820px){
   nav{
     overflow-y: auto;  

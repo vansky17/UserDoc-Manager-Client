@@ -4,12 +4,13 @@
     linear-gradient(
       rgba(0, 0, 0, 0.7), 
       rgba(0, 0, 0, 0.85)
-    );
-   /*  url(https://cdn.pixabay.com/photo/2019/02/10/17/10/notebook-3987701_960_720.jpg) repeat;  */ 
+    ),
+    url(https://cdn.pixabay.com/photo/2019/02/10/17/10/notebook-3987701_960_720.jpg) repeat;   
    /*  url(https://cdn.pixabay.com/photo/2018/03/07/07/55/laptop-3205413_960_720.jpg) repeat; */ 
     /* url(https://cdn.pixabay.com/photo/2017/09/05/10/07/office-2717006_960_720.jpg) repeat;  */
     /* url(https://cdn.pixabay.com/photo/2018/03/16/04/13/composition-3230164_960_720.jpg) repeat;  */
-    color: white;
+    color: rgba(9, 182, 236, 1);
+    text-shadow: 2px 2px #000;
     background-size: cover;
     background-position: center;
   }

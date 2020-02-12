@@ -169,10 +169,10 @@ class UploadFile extends Component {
       
       
       console.log("Recieved a signed request " + signedRequest);
-
+      let contentType = fileType === 'pdf'? 'application/pdf' : 'application/octet-stream'
       const options = {
         headers: {
-          'Content-Type': 'application/pdf'
+          'Content-Type': contentType
         }
       };
       axios.put(signedRequest,file,options)
@@ -297,8 +297,8 @@ class UploadFile extends Component {
                 <option value="PDF">PDF</option>
                 <option value="DOCX">DOCX</option>
                 <option value="XSL">XSL</option>
-                <option value="PPT">PPT</option>
-                <option value="mp4">mp4</option>
+                <option value="PPT">ZIP</option>
+                <option value="mp4">PNG/JPEG</option>
               </select>
               <label htmlFor="reldate">Release Date</label>
             <input
