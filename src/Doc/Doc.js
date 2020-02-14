@@ -39,14 +39,14 @@ class Doc extends React.Component {
     </tr>,
     this.state.expanded && (
       <tr className="expandable" key="tr-expander">
-        <td className="uk-background-muted" colSpan={7}>
+        <td className="description-background" colSpan={7}>
           <div ref="expanderBody" className="inner uk-grid">
             <div >
               <h4>Description</h4>
               <ul> 
-                <li>{descr}</li>
+                <li className="descr-text">{descr}</li>
                 <li>Author: {author} </li>
-                <li><button ><a href={path} target="_blank">OPEN</a></button></li>
+                <li><button className="open-doc"><a href={path} target="_blank">OPEN</a></button></li>
               </ul>
             </div>
           </div>

@@ -18,5 +18,26 @@ tr.expandable > td > .inner {
   overflow: hidden;
 } 
 tbody {
+  border: 1px solid black;
   box-shadow: 1px 1px 7px 1px rgba(0,0,0,0.6);
+}
+.description-background {
+  background-color: aliceblue;
+}
+.descr-text {
+  font-style: italic;
+}
+.open-doc {
+  background-color: #222629;
+  margin-top: 0.7em;
+  min-width: 6em;
+  padding: 0.4em 0 0.3em;
+}
+.open-doc a {
+  color: white;
+  font-size: 1.2em;
+  
+}
+.open-doc a:hover {
+  color: rgba(9, 182, 236, 1);
 }

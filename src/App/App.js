@@ -96,9 +96,9 @@ class App extends React.Component {
     console.log( this.state.products)
     return (
       <UserDocsContext.Provider value={contextValue}>
-        <div className="App">
+        <div className="App"> 
           <Sidebar />
-          <Route path='/main'> 
+          <Route path='/'> 
             <main role="main">
             <Header/>
  

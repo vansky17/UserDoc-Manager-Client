@@ -33,6 +33,7 @@ class UploadFile extends Component {
       vernumValid: false,
       authorValid: false,
       productSelectValid: false,
+      fileSelectValid: false,
       validationMessage: null
     }
   }
@@ -76,6 +77,14 @@ class UploadFile extends Component {
         hasErrors = false
       }
     }
+    if (name === "fileSelect") {
+      if (!value){
+        hasErrors = true
+      }
+      else {
+        hasErrors = false
+      }
+    }
     else if ((name === 'productSelect') && (value === 'Select')) {
       hasErrors = true
     }
@@ -87,8 +96,8 @@ class UploadFile extends Component {
     }, this.formValid);
   }
   formValid() {
-    const { titleValid, productSelectValid, vernumValid, vernum, authorValid} = this.state;
-    if (titleValid && productSelectValid && vernumValid && (vernum !== 0) && authorValid === true) {
+    const { titleValid, productSelectValid, vernumValid, vernum, authorValid, fileSelectValid} = this.state;
+    if (titleValid && productSelectValid && vernumValid && (vernum !== 0) && authorValid && fileSelectValid === true) {
       this.setState({
         formValid: true,
         validationMessage: null
@@ -208,12 +217,10 @@ class UploadFile extends Component {
     const SuccessMessage = () => (
       <div style={{padding:50}}>
         <h3 style={{color: 'green'}}>SUCCESSFUL UPLOAD</h3>
-        {/* <a href={this.state.url}>Access the file here</a> */}
         <div className="buttons">
             <button
               type="submit"
-              className="button"
-              disabled={!this.state.formValid}>
+              className="button">
               CONFIRM? 
             </button>
             <div className="buttons">
@@ -266,9 +273,11 @@ class UploadFile extends Component {
             <input 
               name="select-file"
               id="select-file"
+              name="fileSelect"
               onChange={this.handleChange}
               ref={(ref) => { this.uploadInput = ref; }} 
-              type="file"/>
+              type="file"
+              onChange={e => this.updateFormEntry(e)} />
             <label htmlFor="part-number">Part number</label>
             <input
               type="text"
@@ -291,6 +300,7 @@ class UploadFile extends Component {
               onChange={e => this.updateFormEntry(e)} />
             <label htmlFor="format">Format</label>
             <select name='formattype' 
+              className="field"
               id='format' 
               onChange={(e) => this.setState({ formattype: e.target.value })}>
                 <option value>Select one</option>

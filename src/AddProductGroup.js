@@ -143,10 +143,10 @@ export default class AddProductGroup extends React.Component {
               }}>
             </a>
             <header>
-              <h3>Manage product groups</h3>
+              <h3>Manage Product Groups</h3>
             </header>
             <form 
-                className=""
+                className="doc-form"
                 onSubmit={e => this.handleSubmit(e)}>
                 <div className="form-group">
                   <label htmlFor="title">Create new product group</label>
@@ -171,10 +171,12 @@ export default class AddProductGroup extends React.Component {
                  {}
                 </div>
               </form>  
-              <form className="">
+              <form className="doc-form">
                 <div className="form-group">
                 <label htmlFor="delete">Delete product group</label>
-                <select onChange={this.handleChangeSelect} name='delete' id='delete' >
+                <select
+                className="field"
+                 onChange={this.handleChangeSelect} name='delete' id='delete' >
                   <option>Select one</option>
                   {products.map(product => 
                     <option value={product.id} key={product.id}>{product.name}</option>
