@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import UserDocsContext from './UserDocsContext';
 import config from './config';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 /* import {Progress} from 'reactstrap'; */
 /* import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; */
@@ -371,8 +373,10 @@ class UploadFile extends Component {
           {this.state.error ? <ErrorMessage/> : null}
           <button 
           onClick={this.handleUpload}
-          className="button"
+          className="button field"
           disabled={!this.state.formValid}>
+            <FontAwesomeIcon icon={faFileUpload} />
+                <br />
             UPLOAD DOC
           </button>
         <div className="buttons">

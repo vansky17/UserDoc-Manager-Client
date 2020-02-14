@@ -2,6 +2,8 @@ import React from 'react';
 import UserDocsContext from './UserDocsContext';
 import config from './config';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt, faDatabase } from "@fortawesome/free-solid-svg-icons";
 import './App/App.css'
 import './Upload.css'
 /* This is not working yet */
@@ -15,6 +17,7 @@ export default class AddProductGroup extends React.Component {
         productid: "",
         formValid: false,
         titleValid: false,
+        delButtonValid: false,
         validationMessage: "",
       };
     }
@@ -132,6 +135,13 @@ export default class AddProductGroup extends React.Component {
     }
     handleChangeSelect = (event) =>{
       this.setState({ productid: event.target.value })
+      console.log(event.target.value)
+      if (event.target.value !== 'Select one'){
+        this.setState({delButtonValid: true})
+      }else {
+        this.setState({delButtonValid: false})
+      }
+        
     }
     render() {
       const { history } = this.props;
@@ -161,12 +171,14 @@ export default class AddProductGroup extends React.Component {
                     aria-placeholder="Product name"
                     onChange={e => this.updateFormEntry(e)}/>
                 </div>
-                <div className="buttons">
+                <div >
                  <button 
                     type="submit" 
-                    className="button"
+                    className="button field"
                     disabled={this.state.formValid === false}>
-                     Create
+                      <FontAwesomeIcon icon={faDatabase} />
+                      <br/>
+                     CREATE PRODUCT
                  </button>
                  {}
                 </div>
@@ -182,16 +194,18 @@ export default class AddProductGroup extends React.Component {
                     <option value={product.id} key={product.id}>{product.name}</option>
                   )}
                 </select>
-              <div className="buttons">
+              <div >
                   <button 
                     onClick={this.handleClickDelete}
                     type="" 
-                    className="button"
-                      /* disabled={} */>
-                    Delete
+                    className="button field"
+                    disabled={!this.state.delButtonValid}>
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                    <br/>
+                    DELETE PRODUCT
                   </button>
                   {}
-                  </div>
+                </div>
               </div>
               </form>
           {/*

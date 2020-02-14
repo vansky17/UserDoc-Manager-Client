@@ -50,7 +50,7 @@
 }
 .doc-form {
   background-color: #dce4de;
-  box-shadow: inset 0 0 17px #000000;
+  box-shadow: inset 0 0 4px #000000;
   padding-top:1.5em;
 }
 .upload .buttons {
@@ -70,6 +70,13 @@
   background-color: #222629;
   color: whitesmoke
   /* opacity: .9; */
+}
+button.field{
+  color: rgba(9, 182, 236, 1);
+  margin-bottom: 1em;
+}
+button.field:disabled {
+  color: gray;
 }
 .textfield-description {
   max-width: 80%;
