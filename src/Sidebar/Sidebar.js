@@ -18,7 +18,6 @@ class Sidebar extends React.Component {
   }
   toggleMobileMenu = () => {  
     this.setState({ visible: ! this.state.visible });
-    console.log(this.state.visible);
   }
 
   render () {

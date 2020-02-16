@@ -162,9 +162,6 @@ class UploadFile extends Component {
   handleUpload = (ev) => {
     ev.preventDefault();
    
-  /*   const config = {
-      onUploadProgress: progressEvent => console.log(progressEvent.loaded)
-  } */
     let file = this.uploadInput.files[0];
     // Split the filename to get the name and type
     let fileParts = this.uploadInput.files[0].name.split('.');

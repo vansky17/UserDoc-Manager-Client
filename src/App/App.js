@@ -93,7 +93,6 @@ class App extends React.Component {
       deleteProduct: this.handleDeleteProduct,
       back: this.handleBackButton
     };
-    console.log( this.state.products)
     return (
       <UserDocsContext.Provider value={contextValue}>
         <div className="App"> 
@@ -101,7 +100,6 @@ class App extends React.Component {
           <Route path='/'> 
             <main role="main">
             <Header/>
- 
             { this.state.products.map(product =>
             <ProductGroup
               key={product.id}
