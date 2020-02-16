@@ -1,15 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import {
-  faPlus, faChevronLeft, faTrashAlt, faCheckDouble
-} from '@fortawesome/free-solid-svg-icons'
 import App from './App'
 
-library.add(faPlus, faChevronLeft, faTrashAlt, faCheckDouble)
-
-describe.skip("App renders properly", () => {
+describe("App renders properly", () => {
   it('renders without crashing', () => {
     const div = document.createElement('div')
     ReactDOM.render(

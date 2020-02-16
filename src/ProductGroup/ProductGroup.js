@@ -2,8 +2,7 @@ import React from 'react'
 import '../App/App.css'
 import Doc from '../Doc/Doc'
 import UserDocsContext from "../UserDocsContext";
-import PropTypes from 'prop-types';
-import uuid from "uuid"; 
+/* import uuid from "uuid";  */
 class ProductGroup extends React.Component {
 
   static defaultProps = {
@@ -14,9 +13,7 @@ class ProductGroup extends React.Component {
 
   static contextType = UserDocsContext;
   render () {
-
     const { name, id, docs } = this.props
-    console.log(name, id, docs);
     return (
       <>
         <section id={id}>
@@ -54,8 +51,7 @@ class ProductGroup extends React.Component {
     )
   }
 }
-
-export default ProductGroup
-ProductGroup.propType = {
-  match: PropTypes.object.isRequired
+ProductGroup.defaultProps = {
+  docs: [],
 };
+export default ProductGroup

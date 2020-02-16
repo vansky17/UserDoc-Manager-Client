@@ -4,9 +4,7 @@ import UserDocsContext from './UserDocsContext';
 import config from './config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
-/* import {Progress} from 'reactstrap'; */
-/* import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; */
+import {Progress} from 'reactstrap';
 import './Upload.css'
 class UploadFile extends Component {
 
@@ -18,6 +16,7 @@ class UploadFile extends Component {
       url : "",
       error: false,
       errorMessage : "",
+      loaded:0,
       /* Doc metadata: */ 
       title:"",
       productSelect: "",
@@ -29,7 +28,7 @@ class UploadFile extends Component {
       descr: "No description",
       productId: "",
       path: "https://google.com",
-      /* else */
+      /* validation params */
       formValid: false,
       titleValid: false,
       vernumValid: false,
@@ -40,7 +39,7 @@ class UploadFile extends Component {
     }
   }
   static contextType = UserDocsContext;
-
+  
   goBack = () => {
     this.props.history.goBack();
   }
@@ -61,7 +60,7 @@ class UploadFile extends Component {
   getFormatSelection(e) {
     let selection;
       selection = e.target.selectedOptions[0].value;
-      e.target.
+     
       this.setState({
         formattype: selection
       })
@@ -159,8 +158,13 @@ class UploadFile extends Component {
     this.setState({success: false, url : ""});
 
   }
+  
   handleUpload = (ev) => {
     ev.preventDefault();
+   
+  /*   const config = {
+      onUploadProgress: progressEvent => console.log(progressEvent.loaded)
+  } */
     let file = this.uploadInput.files[0];
     // Split the filename to get the name and type
     let fileParts = this.uploadInput.files[0].name.split('.');
@@ -184,7 +188,11 @@ class UploadFile extends Component {
       const options = {
         headers: {
           'Content-Type': contentType
-        }
+        },
+        onUploadProgress: ProgressEvent => {
+          this.setState({
+            loaded: (ProgressEvent.loaded / ProgressEvent.total*100),
+        })}
       };
       axios.put(signedRequest,file,options)
       .then(result => {
@@ -217,12 +225,13 @@ class UploadFile extends Component {
  /* metadata options end */
  /* upload options */
     const SuccessMessage = () => (
-      <div style={{padding:50}}>
+      <div style={{padding:50, marginTop: "-2em"}}>
         <h3 style={{color: 'green'}}>SUCCESSFUL UPLOAD</h3>
         <div className="buttons">
             <button
               type="submit"
-              className="button">
+              className="button"
+              disabled={!this.state.formValid}>
               CONFIRM? 
             </button>
             <div className="buttons">
@@ -261,25 +270,26 @@ class UploadFile extends Component {
           className="doc-form"
           onSubmit={e => this.handleSubmit(e)}>
           <div className="form-group">
-            <label htmlFor="doc-name">Document name</label>
+            <label htmlFor="doc-name">Document name*</label>
             <input
               type="text"
               className="field"
               name="title"
               id="title"
               aria-label="Title"
-              aria-required="true"
+              aria-required="true" required
               placeholder='Document Name'
               onChange={e => this.updateFormEntry(e)} />
-              <label htmlFor="part-number">Browse file</label>
+              <label htmlFor="part-number">Browse file*</label>
             <input 
-              name="select-file"
               id="select-file"
               name="fileSelect"
-              onChange={this.handleChange}
+              className="field"
+              aria-required="true" required
+              /* onChange={this.handleChange} */
               ref={(ref) => { this.uploadInput = ref; }} 
               type="file"
-              onChange={e => this.updateFormEntry(e)} />
+              onChange={e => {this.updateFormEntry(e); this.handleChange()}} />
             <label htmlFor="part-number">Part number</label>
             <input
               type="text"
@@ -290,27 +300,27 @@ class UploadFile extends Component {
               aria-required="false"
               placeholder='optional'
               onChange={e => this.updateFormEntry(e)} />
-            <label htmlFor="version">Version</label>
+            <label htmlFor="version">Version*</label>
             <input type="number"
               className="field"
               name='vernum'
               id='version'
               aria-label="Version"
-              aria-required="true"
-              required
+              aria-required="true" required
               placeholder='Enter version number'
               onChange={e => this.updateFormEntry(e)} />
-            <label htmlFor="format">Format</label>
+            <label htmlFor="format">Format*</label>
             <select name='formattype' 
               className="field"
               id='format' 
+              aria-required="true" required
               onChange={(e) => this.setState({ formattype: e.target.value })}>
                 <option value>Select one</option>
                 <option value="PDF">PDF</option>
                 <option value="DOCX">DOCX</option>
                 <option value="XSL">XSL</option>
-                <option value="PPT">ZIP</option>
-                <option value="mp4">PNG/JPEG</option>
+                <option value="ZIP">ZIP</option>
+                <option value="PNG/JPG">PNG/JPG</option>
               </select>
               <label htmlFor="reldate">Release Date</label>
             <input
@@ -332,26 +342,26 @@ class UploadFile extends Component {
               aria-required="false"
               placeholder='Describe the contents of this doc (optional)'
               onChange={e => this.setState({ descr: e.target.value })} />
-            <label htmlFor="doc-name">Author</label>
+            <label htmlFor="doc-name">Author*</label>
             <input
               type="text"
               className="field"
               name="author"
               id="author"
               aria-label="Author"
-              aria-required="true"
+              aria-required="true" required
               placeholder='Author'
               onChange={e => this.updateFormEntry(e)} />
           </div>
           <div className="form-group">
-            <label htmlFor="product-select">Assign to product group</label>
+            <label htmlFor="product-select">Assign to product group*</label>
             <select
               type="text"
               className="field"
               name="productSelect"
               id="product-select"
               aria-label="product"
-              aria-required="true"
+              aria-required="true" required
               ref={this.productSelect}
               onChange={e => this.updateFormEntry(e)}>
               <option>Select</option>
@@ -371,6 +381,7 @@ class UploadFile extends Component {
         {/* <h3>UPLOAD FILE</h3> */}
           {this.state.success ? <SuccessMessage/> : null}
           {this.state.error ? <ErrorMessage/> : null}
+          <Progress max="100" animated/* color="success" */ value={this.state.loaded} >{Math.round(this.state.loaded,2)}%</Progress>
           <button 
           onClick={this.handleUpload}
           className="button field"

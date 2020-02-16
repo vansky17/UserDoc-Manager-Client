@@ -109,8 +109,6 @@ export default class AddProductGroup extends React.Component {
     }
     handleClickDelete = (e) => {
       e.preventDefault()
-      const {productId} = this.state.productid
-      console.log(this.state.productid)
       fetch(`${config.API_ENDPOINT}/products/${this.state.productid}`, {
         method: 'DELETE',
         headers: {

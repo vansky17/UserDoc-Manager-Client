@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductGroup component renders a .ProductGroup by default 1`] = `
+<Fragment>
+  <section>
+    <h3 />
+    <table>
+      <tbody>
+        <tr>
+          <th>
+            Document
+          </th>
+          <th>
+            Part Number
+          </th>
+          <th>
+            Doc Version
+          </th>
+          <th>
+            Format
+          </th>
+          <th>
+            Release Date
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</Fragment>
+`;
+
+exports[`ProductGroup component renders the ProductGroup given props 1`] = `
+<Fragment>
+  <section
+    id="a"
+  >
+    <h3>
+      test
+    </h3>
+    <table>
+      <tbody>
+        <tr>
+          <th>
+            Document
+          </th>
+          <th>
+            Part Number
+          </th>
+          <th>
+            Doc Version
+          </th>
+          <th>
+            Format
+          </th>
+          <th>
+            Release Date
+          </th>
+        </tr>
+        <Doc
+          author="John Doe"
+          descr="No description"
+          formattype="mp4"
+          id={24}
+          key="24"
+          name="practice for mockup2"
+          partnum="34563456"
+          path="https://userdocsmanager.s3.us-east-2.amazonaws.com/notes.png"
+          productid={6}
+          reldate="2020-02-12T21:27:48.510Z"
+          vernum={1}
+        />
+        <Doc
+          author="IS"
+          descr="No description"
+          formattype="mp4"
+          id={25}
+          key="25"
+          name="Video"
+          partnum="127"
+          path="https://userdocsmanager.s3.us-east-2.amazonaws.com/small.mp4"
+          productid={6}
+          reldate="2020-02-12T21:31:02.972Z"
+          vernum={1}
+        />
+        <Doc
+          author="IS"
+          descr="No description"
+          formattype="DOCX"
+          id={26}
+          key="26"
+          name="JS-playground 2"
+          partnum="123.4567"
+          path="https://userdocsmanager.s3.us-east-2.amazonaws.com/clean_form_bg.jpg"
+          productid={6}
+          reldate="2020-02-12T22:28:23.585Z"
+          vernum={1}
+        />
+      </tbody>
+    </table>
+  </section>
+</Fragment>
+`;

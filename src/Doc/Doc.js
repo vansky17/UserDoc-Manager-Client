@@ -1,8 +1,11 @@
 import React from 'react'
 import { slideDown, slideUp } from '../anim';
+import { format } from 'date-fns'
 import './Doc.css'
 
+
 class Doc extends React.Component {
+ 
   state = { expanded: false }
 
   toggleExpander = (e) => {
@@ -23,9 +26,7 @@ class Doc extends React.Component {
       });
     }
   }
-   formatDate = (str) => {
-    return str.substr(0, 10);
-  }
+  
  render () {
   const { name, partnum,vernum, formattype, reldate, author, descr, path} = this.props 
 
@@ -35,7 +36,7 @@ class Doc extends React.Component {
   <td >{partnum}</td>
   <td>{vernum}</td>
   <td>{formattype}</td>
-  <td>{this.formatDate(reldate)}</td>
+  <td>{format(reldate, 'Do MMM YYYY')}</td>
     </tr>,
     this.state.expanded && (
       <tr className="expandable" key="tr-expander">
@@ -46,7 +47,7 @@ class Doc extends React.Component {
               <ul> 
                 <li className="descr-text">{descr}</li>
                 <li>Author: {author} </li>
-                <li><button className="open-doc"><a href={path} target="_blank">OPEN</a></button></li>
+                <li><button className="open-doc"><a href={path} target="_blank" rel="noopener noreferrer">OPEN</a></button></li>
               </ul>
             </div>
           </div>

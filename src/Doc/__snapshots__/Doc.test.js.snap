@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Doc component renders a .Doc by default 1`] = `
+Array [
+  <tr
+    className="tr-toggable"
+    onClick={[Function]}
+  >
+    <td>
+      <input
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        type="checkbox"
+      />
+    </td>
+    <td />
+    <td />
+    <td />
+    <td>
+      Invalid Date
+    </td>
+  </tr>,
+  "",
+]
+`;
+
+exports[`Doc component renders the Doc given props 1`] = `
+Array [
+  <tr
+    className="tr-toggable"
+    onClick={[Function]}
+  >
+    <td>
+      <input
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        type="checkbox"
+      />
+      name
+    </td>
+    <td>
+      partnum
+    </td>
+    <td>
+      1
+    </td>
+    <td>
+      PDF
+    </td>
+    <td>
+      15th Jan 2019
+    </td>
+  </tr>,
+  "",
+]
+`;

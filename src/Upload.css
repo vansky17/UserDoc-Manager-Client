@@ -68,8 +68,8 @@
 }
 .field {
   background-color: #222629;
-  color: whitesmoke
-  /* opacity: .9; */
+  color: whitesmoke;
+  border: 1px solid #222629;
 }
 button.field{
   color: rgba(9, 182, 236, 1);
@@ -83,6 +83,7 @@ button.field:disabled {
   background-color: #222629;
   color: whitesmoke
 }
+ 
 @media screen and (max-width:670px){
   .close {
     top: 3em;

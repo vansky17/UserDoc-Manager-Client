@@ -7,8 +7,6 @@ import { faHome, faFileUpload, faProjectDiagram } from "@fortawesome/free-solid-
 import { HashLink as Link  } from 'react-router-hash-link';
 import "../App/App.css";
 import "./Sidebar.css";
-import Config from '../config'
-const API = Config.API_ENDPOINT;
 
 class Sidebar extends React.Component {
 
@@ -113,7 +111,7 @@ class Sidebar extends React.Component {
                          flexWrap: 'wrap'
                 }}>
             { products.map(product =>
-                <li style={{width: '33%',display:'inline'}}    
+                <div style={{width: '49%',display:'inline'}}    
                 key={product.id}> 
                 <CircleButton
                   tag={Link}
@@ -124,7 +122,7 @@ class Sidebar extends React.Component {
                 >
                   {product.name}
                 </CircleButton>
-                </li>
+                </div>
               )} </li>
             <hr></hr>
             <li>
