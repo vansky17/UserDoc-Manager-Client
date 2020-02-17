@@ -283,7 +283,6 @@ class UploadFile extends Component {
               name="fileSelect"
               className="field"
               aria-required="true" required
-              /* onChange={this.handleChange} */
               ref={(ref) => { this.uploadInput = ref; }} 
               type="file"
               onChange={e => {this.updateFormEntry(e); this.handleChange()}} />
@@ -365,20 +364,9 @@ class UploadFile extends Component {
               {options}
             </select>
           </div>
-          {/* <div className="buttons">
-            <button
-              type="submit"
-              className="button"
-              disabled={!this.state.formValid}>
-              Submit Doc
-            </button>
-          </div> */}
-       {/*  </form> 
-        <form className="doc-form"> */}
-        {/* <h3>UPLOAD FILE</h3> */}
           {this.state.success ? <SuccessMessage/> : null}
           {this.state.error ? <ErrorMessage/> : null}
-          <Progress max="100" animated/* color="success" */ value={this.state.loaded} >{Math.round(this.state.loaded,2)}%</Progress>
+          <Progress max="100" animated value={this.state.loaded} >{Math.round(this.state.loaded,2)}%</Progress>
           <button 
           onClick={this.handleUpload}
           className="button field"

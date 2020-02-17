@@ -1,10 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header component renders a .Header by default 1`] = `
-<Fragment>
-  <header
-    id="home"
-    role="banner"
+<header
+  className="video-container"
+  id="home"
+  role="banner"
+>
+  <video
+    autoPlay={true}
+    id="videoBG"
+    loop={true}
+    muted={true}
+    src="video.mov"
+  />
+  <div
+    className="video-content"
   >
     <h1>
       UserDocs Manager
@@ -15,15 +25,25 @@ exports[`Header component renders a .Header by default 1`] = `
     <h4>
       Your Department
     </h4>
-  </header>
-</Fragment>
+  </div>
+</header>
 `;
 
 exports[`Header component renders the Header given props 1`] = `
-<Fragment>
-  <header
-    id="home"
-    role="banner"
+<header
+  className="video-container"
+  id="home"
+  role="banner"
+>
+  <video
+    autoPlay={true}
+    id="videoBG"
+    loop={true}
+    muted={true}
+    src="video.mov"
+  />
+  <div
+    className="video-content"
   >
     <h1>
       UserDocs Manager
@@ -34,6 +54,6 @@ exports[`Header component renders the Header given props 1`] = `
     <h4>
       Your Department
     </h4>
-  </header>
-</Fragment>
+  </div>
+</header>
 `;

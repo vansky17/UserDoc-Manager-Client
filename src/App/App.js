@@ -29,13 +29,7 @@ class App extends React.Component {
       errorBoundaryKey: 0
     };
   }
-  /*  getDocsForProduct = (docs=[], productid) => { 
-    if (!productid) {
-      throw new Error("Invalid product ID!")
-    } else {
-      return docs.filter(doc => doc.productid === productid)
-    }
-  } */
+
 
   handleAddProduct = (product, docs) => {
     product.docs = getDocsForProduct(docs, product.id)
@@ -109,10 +103,10 @@ class App extends React.Component {
             >    
             </ProductGroup>
             )}
-            {/* <Switch> */}
+            
               <Route path="/upload-file" exact component={UploadFile} />
               <Route path="/add-product" exact component={AddProductGroup} />
-            {/* </Switch> */}
+           
             </main>
           </Route>
         </div>

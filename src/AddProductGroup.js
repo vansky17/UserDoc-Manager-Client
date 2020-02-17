@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faDatabase } from "@fortawesome/free-solid-svg-icons";
 import './App/App.css'
 import './Upload.css'
-/* This is not working yet */
+
 export default class AddProductGroup extends React.Component {
     constructor(props) {
       super(props);
@@ -206,16 +206,6 @@ export default class AddProductGroup extends React.Component {
                 </div>
               </div>
               </form>
-          {/*
-            <label htmlFor="delete">Delete product group</label>
-            <select name='delete' id='delete' >
-              <option>Product 1</option>
-              <option>Product 2</option>
-              <option>Product 3</option>
-            </select>
-          </div>
-          <button type='submit'>Delete</button>
-          </form> */}
             <div className="buttons">
               <button 
                 type="button" 
