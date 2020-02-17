@@ -1,68 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# UserDoc-Manager-Client
+ToDo
+![Noteful screenshot](https://github.com/)
 
-## Available Scripts
+[Live Demo](https://user-docs-manager.now.sh/)
 
-In the project directory, you can run:
+## Description
 
-### `npm start`
+This is a react client application. The associated back-end can be found here: [UserDoc-Manager-API](https://github.com/vansky17/UserDoc-Manager-API.git).
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Functional Description
+The purpose of this app is to serve as a small, yet not over-complicated content management system for small to mid-range organizations to help them manage their user/technical documentation
+#### Easy Access and Overview to User Documentation
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- Get quick overview of all stored documents, ordered by product groups. Get information on topic, format, release date, article and version number, as well as description.
 
-### `npm test`
+- Open PDF documents directly in your browser. Other file types are either directly opened or downloaded for further use when clicking on the OPEN button (depending on your operating system and/or and the settings of your browser).
+#### Upload Documents
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Upload new user documentation and use the settings wizard to provide all the required data, then assign it to the respective product group.
 
-### `npm run build`
+- The following file formats are supported: PDF, DOCX, XSL, ZIP, PNG/JPG
+#### Manage Product Groups
+- Create new product groups or delete existing ones. Once created, you can assign uploaded documents to better organize your user documentation.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Technical Description
+- React **Context API** is used in this application.
+ 
+- **AWS S3** is used to store the documents.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+- Fetch requests are made to two endpoints when the application mounts: **/products** and **/docs**. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- The API calls are made to a **PostgreSQL database**
 
-### `npm run eject`
+- To upload to the S3 Bucket make a request to the **/upload** endpoint
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Setup
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. See [UserDoc-Manager-API](https://github.com/vansky17/UserDoc-Manager-API.git) for instructions on installing the back-end API
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+2. Clone this repository
 
-## Learn More
+3. In the terminal, change to the directory on your computer that contains this repo
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+4. Install dependencies: `npm install`
+   
+5. Change the back-end API endpoint in `./src/config.js` 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+6. Start the app in a web browser: `npm start`
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
