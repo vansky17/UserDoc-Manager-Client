@@ -4,11 +4,11 @@ import { withRouter } from "react-router";
 import UserDocsContext from "../UserDocsContext";
 import UploadFile from "../UploadFile";
 import AddProductGroup from "../AddProductGroup";
-import Sidebar from "../Sidebar/Sidebar"
-import Header from '../Header/Header'
-import ProductGroup from '../ProductGroup/ProductGroup'
+import Sidebar from "../Sidebar/Sidebar";
+import Header from '../Header/Header';
+import ProductGroup from '../ProductGroup/ProductGroup';
 import "./App.css";
-import Config from '../config'
+import Config from '../config';
 const API = Config.API_ENDPOINT;
 
 const getDocsForProduct = (docs=[], productid) => { 
@@ -17,7 +17,7 @@ const getDocsForProduct = (docs=[], productid) => {
   } else {
     return docs.filter(doc => doc.productid === productid)
   }
-}
+};
 
 class App extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class App extends React.Component {
       files:[],
       errorBoundaryKey: 0
     };
-  }
+  };
 
 
   handleAddProduct = (product, docs) => {
@@ -72,7 +72,7 @@ class App extends React.Component {
       .catch(error => {
         console.error( error );
       });
-  }
+  };
    
   render() {
     const contextValue = {

@@ -1,7 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme'
-import toJson from 'enzyme-to-json'
-import Sidebar from './Sidebar'
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import Sidebar from './Sidebar';
 
 describe(`Doc component`, () => {
   const props = {
@@ -64,12 +66,24 @@ describe(`Doc component`, () => {
 }
 
   it('renders a .Sidebar by default', () => {
-    const wrapper = shallow(<Sidebar />)
-    expect(toJson(wrapper)).toMatchSnapshot()
-  })
+    const wrapper = shallow(<Sidebar />);
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
 
   it('renders the Sidebar given props', () => {
-    const wrapper = shallow(<Sidebar {...props} />)
-    expect(toJson(wrapper)).toMatchSnapshot()
-  })
-})
+    const wrapper = shallow(<Sidebar {...props} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+});
+describe("Sidebar renders properly", () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(
+      <BrowserRouter>
+        <Sidebar />
+      </BrowserRouter>,
+      div
+    );
+    ReactDOM.unmountComponentAtNode(div);
+  });
+});

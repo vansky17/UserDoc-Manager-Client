@@ -1,8 +1,7 @@
 import React from "react";
-/* import { Route, Link } from "react-router-dom"; */
 import UserDocsContext from "../UserDocsContext";
-import CircleButton from '../CircleButton/CircleButton'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import CircleButton from '../CircleButton/CircleButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faFileUpload, faProjectDiagram } from "@fortawesome/free-solid-svg-icons";
 import { HashLink as Link  } from 'react-router-hash-link';
 import "../App/App.css";
@@ -21,8 +20,8 @@ class Sidebar extends React.Component {
   }
 
   render () {
-    const { products=[] } = this.context
-    const mobileStyle = this.state.visible? "block" : "none"
+    const { products=[] } = this.context;
+    const mobileStyle = this.state.visible? "block" : "none";
  
     return(
       <nav role="navigation">
@@ -32,6 +31,7 @@ class Sidebar extends React.Component {
             <span className="line"></span>
             <span className="line"></span>
             <span className="line"></span>
+            <span style={{opacity:0}}>-</span>
           </label>
         </div>
         <div className="menu">
@@ -150,11 +150,9 @@ class Sidebar extends React.Component {
             </li>
           </ul> 
         </div> 
-      </div>  
-        
-        
+      </div>    
       </nav>
-    )
+    );
   }
 }
-export default Sidebar
+export default Sidebar;

@@ -7,7 +7,12 @@ Array [
     onClick={[Function]}
   >
     <td>
+      <label
+        className="doc-titel"
+        htmlFor="undefinedundefined"
+      />
       <input
+        id="undefinedundefined"
         style={
           Object {
             "display": "none",
@@ -15,6 +20,7 @@ Array [
         }
         type="checkbox"
       />
+       
     </td>
     <td />
     <td />
@@ -34,7 +40,14 @@ Array [
     onClick={[Function]}
   >
     <td>
+      <label
+        className="doc-titel"
+        htmlFor="nameNo description"
+      >
+        name
+      </label>
       <input
+        id="nameNo description"
         style={
           Object {
             "display": "none",
@@ -42,7 +55,7 @@ Array [
         }
         type="checkbox"
       />
-      name
+       
     </td>
     <td>
       partnum

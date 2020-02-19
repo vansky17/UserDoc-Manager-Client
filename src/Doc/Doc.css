@@ -1,7 +1,5 @@
 tr.tr-toggable {
     box-shadow: inset 0 3px 3px -2px rgba(0, 0, 0, .7);
-    /* background-color: #dce4de; */
-    /* box-shadow: inset 0 0 8px #000000; */
      cursor:pointer;
     
 }
@@ -20,6 +18,10 @@ tr.expandable > td > .inner {
 tbody {
   border: 1px solid black;
   box-shadow: 1px 1px 7px 1px rgba(0,0,0,0.6);
+}
+.doc-titel {
+  margin-bottom: 0rem;
+  cursor: pointer;
 }
 .description-background {
   background-color: aliceblue;

@@ -2,10 +2,10 @@ import React from 'react';
 import UserDocsContext from './UserDocsContext';
 import config from './config';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faDatabase } from "@fortawesome/free-solid-svg-icons";
-import './App/App.css'
-import './Upload.css'
+import './App/App.css';
+import './Upload.css';
 
 export default class AddProductGroup extends React.Component {
     constructor(props) {
@@ -67,7 +67,7 @@ export default class AddProductGroup extends React.Component {
       } else {
         this.setState({
           formValid: !this.formValid
-        })
+        });
       }
     }
 
@@ -76,11 +76,11 @@ export default class AddProductGroup extends React.Component {
       const {title} = this.state;
       const product = {
         name: title
-      }
+      };
 
       this.setState({
         error: null
-      })
+      });
       fetch(`${config.API_ENDPOINT}/products`, {
           method: 'POST',
           body: JSON.stringify(product),
@@ -91,7 +91,6 @@ export default class AddProductGroup extends React.Component {
         .then(res => {
           if (!res.ok) {
             return res.json().then(error => {
-              console.log(`Error is: ${error}`)
               throw error
             })
           }
@@ -104,11 +103,11 @@ export default class AddProductGroup extends React.Component {
         .catch(error => {
           this.setState({
             error
-          })
-        })
+          });
+        });
     }
     handleClickDelete = (e) => {
-      e.preventDefault()
+      e.preventDefault();
       fetch(`${config.API_ENDPOINT}/products/${this.state.productid}`, {
         method: 'DELETE',
         headers: {
@@ -120,10 +119,8 @@ export default class AddProductGroup extends React.Component {
           return res.json().then(e => Promise.reject(e))
         }
       })
-      .then(() => {
-        
+      .then(() => {  
         this.context.deleteProduct(this.state.productid)
-        /* this.props.history.push("/") */
         this.props.history.goBack()
         window.location.reload()      
       })
@@ -132,23 +129,22 @@ export default class AddProductGroup extends React.Component {
       })
     }
     handleChangeSelect = (event) =>{
-      this.setState({ productid: event.target.value })
-      console.log(event.target.value)
+      this.setState({ productid: event.target.value });
       if (event.target.value !== 'Select one'){
-        this.setState({delButtonValid: true})
+        this.setState({delButtonValid: true});
       }else {
-        this.setState({delButtonValid: false})
+        this.setState({delButtonValid: false});
       }
         
     }
     render() {
       const { history } = this.props;
-      const { products=[] } = this.context
+      const { products=[] } = this.context;
       return (
           <div className="upload" id="add-pg">
             <a href="/#" className="close" onClick={() => {
               history.push("/"); 
-              }}>
+              }}><span style={{opacity:0}}>-</span>
             </a>
             <header>
               <h3>Manage Product Groups</h3>

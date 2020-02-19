@@ -25,6 +25,15 @@ exports[`Doc component renders a .Sidebar by default 1`] = `
       <span
         className="line"
       />
+      <span
+        style={
+          Object {
+            "opacity": 0,
+          }
+        }
+      >
+        -
+      </span>
     </label>
   </div>
   <div
@@ -338,6 +347,15 @@ exports[`Doc component renders the Sidebar given props 1`] = `
       <span
         className="line"
       />
+      <span
+        style={
+          Object {
+            "opacity": 0,
+          }
+        }
+      >
+        -
+      </span>
     </label>
   </div>
   <div

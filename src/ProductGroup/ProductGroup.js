@@ -1,6 +1,6 @@
-import React from 'react'
-import '../App/App.css'
-import Doc from '../Doc/Doc'
+import React from 'react';
+import '../App/App.css';
+import Doc from '../Doc/Doc';
 import UserDocsContext from "../UserDocsContext";
 
 class ProductGroup extends React.Component {
@@ -46,10 +46,10 @@ class ProductGroup extends React.Component {
         </table>
       </section>
     </>
-    )
+    );
   }
 }
 ProductGroup.defaultProps = {
   docs: [],
 };
-export default ProductGroup
+export default ProductGroup;

@@ -1,7 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme'
-import toJson from 'enzyme-to-json'
-import ProductGroup from './ProductGroup'
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
+import ProductGroup from './ProductGroup';
+import ReactDOM from 'react-dom';
+
 
 describe(`ProductGroup component`, () => {
   const props = {
@@ -45,15 +47,25 @@ describe(`ProductGroup component`, () => {
         "path": "https://userdocsmanager.s3.us-east-2.amazonaws.com/clean_form_bg.jpg"
     }
     ]
-  }
+  };
 
   it('renders a .ProductGroup by default', () => {
-    const wrapper = shallow(<ProductGroup />)
-    expect(toJson(wrapper)).toMatchSnapshot()
-  })
+    const wrapper = shallow(<ProductGroup />);
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
 
   it('renders the ProductGroup given props', () => {
-    const wrapper = shallow(<ProductGroup {...props} />)
-    expect(toJson(wrapper)).toMatchSnapshot()
+    const wrapper = shallow(<ProductGroup {...props} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
   })
 })
+describe("Product renders properly", () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(
+       <ProductGroup />,
+      div
+    );
+    ReactDOM.unmountComponentAtNode(div);
+  });
+});

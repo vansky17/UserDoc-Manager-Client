@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import UserDocsContext from './UserDocsContext';
 import config from './config';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 import {Progress} from 'reactstrap';
-import './Upload.css'
+import './Upload.css';
 class UploadFile extends Component {
 
   constructor(props){
@@ -36,8 +36,8 @@ class UploadFile extends Component {
       productSelectValid: false,
       fileSelectValid: false,
       validationMessage: null
-    }
-  }
+    };
+  };
   static contextType = UserDocsContext;
   
   goBack = () => {
@@ -51,7 +51,7 @@ class UploadFile extends Component {
       id = e.target.selectedOptions[0].id;
       this.setState({
         'productId': id
-      })
+      });
     }
     this.setState({
       [e.target.name]: e.target.value,
@@ -63,8 +63,7 @@ class UploadFile extends Component {
      
       this.setState({
         formattype: selection
-      })
-    
+      }); 
   }
   validateEntry(name, value) {
     let hasErrors = false;
@@ -72,25 +71,25 @@ class UploadFile extends Component {
     value = value.trim();
     if ((name === 'title') || (name === 'vernum')) {
       if (value.length < 1) {
-        hasErrors = true
+        hasErrors = true;
       }
       else {
-        hasErrors = false
+        hasErrors = false;
       }
     }
     if (name === "fileSelect") {
       if (!value){
-        hasErrors = true
+        hasErrors = true;
       }
       else {
-        hasErrors = false
+        hasErrors = false;
       }
     }
     else if ((name === 'productSelect') && (value === 'Select')) {
-      hasErrors = true
+      hasErrors = true;
     }
     else {
-      hasErrors = false
+      hasErrors = false;
     }
     this.setState({
       [`${name}Valid`]: !hasErrors,
@@ -108,7 +107,7 @@ class UploadFile extends Component {
       this.setState({
         formValid: !this.formValid,
         validationMessage: 'This field is required.'
-      })
+      });
     }
   }
   handleSubmit(e) {
@@ -126,7 +125,7 @@ class UploadFile extends Component {
       path: path
     }
 
-    this.setState({ error: null })
+    this.setState({ error: null });
 
     fetch(`${config.API_ENDPOINT}/docs`, {
       method: 'POST',
@@ -138,25 +137,23 @@ class UploadFile extends Component {
       .then(res => {
         if (!res.ok) {
           return res.json().then(err => {
-            console.log(`Error is: ${err}`)
             throw err
           })
         }
         return res.json()
       })
       .then(data => {
-        this.props.history.push("/") 
-        window.location.reload()
-        this.context.addDoc(data)
+        this.props.history.push("/"); 
+        window.location.reload();
+        this.context.addDoc(data);
       })
       .catch(err => {
-        this.setState({ err })
+        this.setState({ err });
       })
   }
   /* Upload */
   handleChange = (ev) => {
     this.setState({success: false, url : ""});
-
   }
   
   handleUpload = (ev) => {
@@ -167,21 +164,17 @@ class UploadFile extends Component {
     let fileParts = this.uploadInput.files[0].name.split('.');
     let fileName = fileParts[0];
     let fileType = fileParts[1];
-    console.log("Preparing the upload");
     axios.post(`${config.API_ENDPOINT}/upload`,{
       fileName : fileName,
       fileType : fileType
     })
     .then(response => {
-      console.log(response)
       const returnData = response.data.data.returnData;
       const signedRequest = returnData.signedRequest;
       const url = returnData.url;
       this.setState({url: url, path: url})
       
-      
-      console.log("Recieved a signed request " + signedRequest);
-      let contentType = fileType === 'pdf'? 'application/pdf' : 'application/octet-stream'
+      let contentType = fileType === 'pdf'? 'application/pdf' : 'application/octet-stream';
       const options = {
         headers: {
           'Content-Type': contentType
@@ -193,16 +186,15 @@ class UploadFile extends Component {
       };
       axios.put(signedRequest,file,options)
       .then(result => {
-        console.log("Response from s3")
         this.setState({success: true});
       })
       .catch(error => {
         alert("ERROR " + JSON.stringify(error));
-      })
+      });
     })
     .catch(error => {
       alert(JSON.stringify(error));
-    })
+    });
   }
  /* upload end */
 
@@ -217,8 +209,8 @@ class UploadFile extends Component {
           id={product.id}>
           {product.name}
         </option>
-      )
-    })
+      );
+    });
  /* metadata options end */
  /* upload options */
     const SuccessMessage = () => (
@@ -244,7 +236,7 @@ class UploadFile extends Component {
           </div>
         <br/>
       </div>
-    )
+    );
     const ErrorMessage = () => (
       <div style={{padding:50}}>
         <h3 style={{color: 'red'}}>FAILED UPLOAD</h3>
@@ -252,13 +244,13 @@ class UploadFile extends Component {
         <span>{this.state.errorMessage}</span>
         <br/>
       </div>
-    )
+    );
     /* upload options end */
     return (
       <div className="upload" id="add-doc">
         <a href="/#" className="close" onClick={() => {
           history.push("/"); 
-          }}>
+          }}><span style={{opacity:0}}>-</span>
         </a>
         <header>
           <h3>Upload Document</h3>
@@ -267,7 +259,7 @@ class UploadFile extends Component {
           className="doc-form"
           onSubmit={e => this.handleSubmit(e)}>
           <div className="form-group">
-            <label htmlFor="doc-name">Document name*</label>
+            <label htmlFor="title">Document name*</label>
             <input
               type="text"
               className="field"
@@ -277,9 +269,9 @@ class UploadFile extends Component {
               aria-required="true" required
               placeholder='Document Name'
               onChange={e => this.updateFormEntry(e)} />
-              <label htmlFor="part-number">Browse file*</label>
+              <label htmlFor="fileSelect">Browse file*</label>
             <input 
-              id="select-file"
+              id="fileSelect"
               name="fileSelect"
               className="field"
               aria-required="true" required
@@ -338,7 +330,7 @@ class UploadFile extends Component {
               aria-required="false"
               placeholder='Describe the contents of this doc (optional)'
               onChange={e => this.setState({ descr: e.target.value })} />
-            <label htmlFor="doc-name">Author*</label>
+            <label htmlFor="author">Author*</label>
             <input
               type="text"
               className="field"

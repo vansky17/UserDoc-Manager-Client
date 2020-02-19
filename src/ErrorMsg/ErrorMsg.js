@@ -4,5 +4,5 @@ export default function ErrMsg(props) {
         <p className="input__errmessage">
             {props.validationMessage}
         </p>
-    )
+    );
 }

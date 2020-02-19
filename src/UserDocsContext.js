@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const UserDocsContext = React.createContext({
     docs: [],
@@ -14,4 +14,4 @@ const UserDocsContext = React.createContext({
     back: () => {}
 })
 
-export default UserDocsContext
+export default UserDocsContext;

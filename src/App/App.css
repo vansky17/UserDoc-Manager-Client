@@ -95,15 +95,6 @@ input#hamburger {display:none;}
 .line:nth-child(2) { top: 24px; }
 .line:nth-child(3) { top: 36px; }
 
-/* #hamburger:checked + .hamburger .line:nth-child(1){
-  transform: translateY(12px) rotate(-45deg);
-}
-#hamburger:checked + .hamburger .line:nth-child(2){
-  opacity:0;
-}
-#hamburger:checked + .hamburger .line:nth-child(3){
-  transform: translateY(-12px) rotate(45deg);
-} */
 .mobile-menu {
  display: none;
  padding-top: 3em;

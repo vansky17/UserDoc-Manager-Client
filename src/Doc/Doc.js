@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { slideDown, slideUp } from '../anim';
-import { format } from 'date-fns'
-import './Doc.css'
+import { format } from 'date-fns';
+import './Doc.css';
 
 
 class Doc extends React.Component {
  
-  state = { expanded: false }
+  state = { expanded: false };
 
   toggleExpander = (e) => {
     if (e.target.type === 'checkbox') return;
@@ -28,11 +28,14 @@ class Doc extends React.Component {
   }
   
  render () {
-  const { name, partnum,vernum, formattype, reldate, author, descr, path} = this.props 
+  const { name, partnum,vernum, formattype, reldate, author, descr, path} = this.props; 
 
   return [
     <tr onClick={this.toggleExpander} className="tr-toggable">
- <td><input style={{display: "none"}} type="checkbox" />{name}</td>
+ <td>
+   <label htmlFor={`${name}${descr}`} className="doc-titel">{name}</label>
+   <input id={`${name}${descr}`} style={{display: "none"}} type="checkbox" /> {/* name */} 
+  </td>
   <td >{partnum}</td>
   <td>{vernum}</td>
   <td>{formattype}</td>
