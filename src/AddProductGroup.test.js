@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
-import AddProductGroup from './AddProductGroup'
+import ReactDOM from 'react-dom';
+import AddProductGroup from './AddProductGroup';
 
 describe("Upload renders properly", () => {
     it('renders without crashing', () => {
