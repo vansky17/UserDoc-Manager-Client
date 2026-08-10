@@ -6,15 +6,28 @@ exports[`Header component renders a .Header by default 1`] = `
   id="home"
   role="banner"
 >
-  <h1>
-    UserDocs Manager
-  </h1>
-  <h2>
-    Overview Of Technical Documents
-  </h2>
-  <h3>
-    Your Department
-  </h3>
+  <video
+    aria-hidden="true"
+    autoPlay={true}
+    id="videoBG"
+    loop={true}
+    muted={true}
+    playsInline={true}
+    src="video.mov"
+  />
+  <div
+    className="video-content"
+  >
+    <h1>
+      UserDocs Manager
+    </h1>
+    <h2>
+      Overview Of Technical Documents
+    </h2>
+    <h3>
+      Your Department
+    </h3>
+  </div>
 </header>
 `;
 
@@ -24,14 +37,27 @@ exports[`Header component renders the Header given props 1`] = `
   id="home"
   role="banner"
 >
-  <h1>
-    UserDocs Manager
-  </h1>
-  <h2>
-    Overview Of Technical Documents
-  </h2>
-  <h3>
-    Your Department
-  </h3>
+  <video
+    aria-hidden="true"
+    autoPlay={true}
+    id="videoBG"
+    loop={true}
+    muted={true}
+    playsInline={true}
+    src="video.mov"
+  />
+  <div
+    className="video-content"
+  >
+    <h1>
+      UserDocs Manager
+    </h1>
+    <h2>
+      Overview Of Technical Documents
+    </h2>
+    <h3>
+      Your Department
+    </h3>
+  </div>
 </header>
 `;
