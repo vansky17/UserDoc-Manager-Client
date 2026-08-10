@@ -160,13 +160,14 @@ class UploadFile extends Component {
     ev.preventDefault();
    
     let file = this.uploadInput.files[0];
-    // Split the filename to get the name and type
-    let fileParts = this.uploadInput.files[0].name.split('.');
-    let fileName = fileParts[0];
-    let fileType = fileParts[1];
+    let fileParts = file.name.split('.');
+    let fileType = fileParts.length > 1 ? fileParts.pop() : '';
+    let fileName = file.name;
+    let contentType = file.type || 'application/octet-stream';
     axios.post(`${config.API_ENDPOINT}/upload`,{
       fileName : fileName,
-      fileType : fileType
+      fileType : fileType,
+      contentType: contentType
     })
     .then(response => {
       const returnData = response.data.data.returnData;
@@ -174,7 +175,6 @@ class UploadFile extends Component {
       const url = returnData.url;
       this.setState({url: url, path: url})
       
-      let contentType = fileType === 'pdf'? 'application/pdf' : 'application/octet-stream';
       const options = {
         headers: {
           'Content-Type': contentType
